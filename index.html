@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Teste</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="to-do-list-_1_.ico" type="image/x-icon">
+
+</head>
+
+<body>
+    <header>
+        <img src="to-do-list (2).png" alt="logo">
+    </header>
+    <div class="container">
+        <h2>LISTA</h2>
+        <form id="entradaForm">
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagem">Imagem</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <center>
+        <div class="lista-container" id="listaContainer">
+    </center>
+
+    </div>
+
+    <script>
+        document.getElementById('entradaForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const titulo = document.getElementById('titulo').value;
+            const descricao = document.getElementById('descricao').value;
+            const imagem = document.getElementById('imagem').files[0];
+
+            const item = document.createElement('div');
+            item.className = 'item';
+
+            const tituloElem = document.createElement('h3');
+            tituloElem.textContent = titulo;
+            item.appendChild(tituloElem);
+
+            const descricaoElem = document.createElement('p');
+            descricaoElem.textContent = descricao;
+            item.appendChild(descricaoElem);
+
+            if (imagem) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imgElem = document.createElement('img');
+                    imgElem.src = e.target.result;
+                    item.appendChild(imgElem);
+                };
+                reader.readAsDataURL(imagem);
+            }
+
+            item.addEventListener('click', function () {
+                item.classList.toggle('expanded');
+            });
+
+            document.getElementById('listaContainer').appendChild(item);
+
+            document.getElementById('entradaForm').reset();
+        });
+    </script>
+<div class="criador">
+    <p><p><p><p><p>&copy; 2024 PIETRO E PAULO.</p></p></p></p></p>
+</div>
+</body>
+
+</html>
